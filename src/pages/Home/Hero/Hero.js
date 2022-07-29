@@ -1,6 +1,7 @@
 import React from "react";
 import "./Hero.css";
 import { Link } from "react-router-dom";
+import toiletfloating from "../../../images/toiletfloating.png";
 
 const Hero = () => (
   <section id="hero" className="d-flex align-items-center" data-testid="Hero">
@@ -28,7 +29,7 @@ const Hero = () => (
           data-aos-delay="200"
         >
           <img
-            src="https://png2.cleanpng.com/sh/91abca9819e4008c06400ee7dc1b38ab/L0KzQYq3VsA5N5x5jpH0aYP2gLBuTfNtcaEyeeR9LYDygsXogvxmNZ9qjOl4cnuwd8PokPhqa6Qye9H2cIX3dcO0ifNwdqQyfORqd3nxd37pggRpepD0hZ99b3nvdcW0lQJidqR1eeRuboSwcb73TgBvb15ohNt5LUXmdrS8VcMyPmE9UKcBLkm5Q4K6UMQ4OWY7SKI9MEe4Q4SCVcQveJ9s/kisspng-clip-art-portable-network-graphics-computer-icons-drawing-bathroom-toilet-transparent-amp-png-clip-5cfc5531608856.9631304715600407533954.png"
+            src={toiletfloating}
             className="img-fluid animated"
             alt="toilet"
           />
