@@ -1,0 +1,14 @@
+.homeNavbar {
+  z-index: 999999;
+  top: 0;
+  position: sticky;
+  background-color: #37517E;
+}
+
+.nav-link {
+  color: white !important;
+}
+
+.homeNavbarLinks {
+
+}

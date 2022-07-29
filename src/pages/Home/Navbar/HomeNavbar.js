@@ -1,6 +1,6 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { useEffect, useState } from "react";
-import "./Navbar.css";
+import "./HomeNavbar.css";
 import { FaBars, FaChevronDown } from "react-icons/fa";
 import { classNames, useScrollPosition } from "../tools";
 import logo from "../../../images/logo.png";
@@ -35,7 +35,7 @@ import NavDropdown from "react-bootstrap/NavDropdown";
 //     >
 //       <div className="container d-flex align-items-center">
 //         <a href="/" className="logo me-auto">
-//           <img className="navbarLogo" src={logo} alt="logo" />
+//
 //         </a>
 
 //         <nav id="navbar" className={`navbar ${activate}`}>
@@ -92,16 +92,18 @@ import NavDropdown from "react-bootstrap/NavDropdown";
 // };
 const HomeNavbar = () => {
   return (
-    <Navbar bg="light" expand="lg">
+    <Navbar className="homeNavbar" expand="lg">
       <Container>
-        <Navbar.Brand href="#home">React-Bootstrap</Navbar.Brand>
+        <Navbar.Brand href="#home">
+          <img className="navbarLogo" src={logo} alt="logo" />
+        </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
             <Nav.Link href="#home">Home</Nav.Link>
             <Nav.Link href="#link">Link</Nav.Link>
-            <NavDropdown title="Dropdown" id="basic-nav-dropdown">
-              <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
+            <NavDropdown variant="light" title="Dropdown" id="basic-nav-dropdown">
+              <NavDropdown.Item  href="#action/3.1">Action</NavDropdown.Item>
               <NavDropdown.Item href="#action/3.2">
                 Another action
               </NavDropdown.Item>
@@ -116,8 +118,6 @@ const HomeNavbar = () => {
       </Container>
     </Navbar>
   );
-}
+};
 
-export default BasicExample;
-
-export default Navbar;
+export default HomeNavbar;
