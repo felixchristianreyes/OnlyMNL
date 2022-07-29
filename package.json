@@ -1,4 +1,5 @@
 {
+  "homepage": "https://felixchristianreyes.github.io/gusbamps-toilet-finder" ,
   "name": "gusbamps",
   "version": "0.1.0",
   "private": true,
@@ -9,6 +10,7 @@
     "@testing-library/user-event": "^13.5.0",
     "aos": "^2.3.4",
     "generate-react-cli": "^7.2.0",
+    "gh-pages": "^4.0.0",
     "mdbreact": "^5.2.0",
     "react": "^18.2.0",
     "react-bootstrap": "^2.4.0",
@@ -20,6 +22,8 @@
   },
   "scripts": {
     "start": "react-scripts start",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
