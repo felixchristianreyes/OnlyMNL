@@ -5,6 +5,10 @@
   background-color: #37517e;
 }
 
+.navbar-toggler-icon {
+  background-image: url("/public/images/hamburger.svg") !important;
+}
+
 .navbar-nav {
   align-items: center !important;
   background-color: #0acccb21 !important;
@@ -14,14 +18,11 @@
 
 .navbar-toggler {
   color: #08c3c2 !important;
+  background-color: #480948 !important;
+  border: none !important;
 }
 
-.navbar-toggler-icon {
-}
 
 .nav-link {
   color: white !important;
-}
-
-.homeNavbarLinks {
 }
