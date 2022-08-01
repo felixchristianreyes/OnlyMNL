@@ -1,14 +1,15 @@
+
+
 .homeNavbar {
   z-index: 999999;
   top: 0;
-  position: -webkit-sticky;
   position: sticky;
   background-color: #37517e;
 }
 
 .navbar-nav {
   align-items: center !important;
-  background-color: rgba(10, 204, 203, 0.1294117647) !important;
+  background-color: #0acccb21 !important;
   border-radius: 20px;
   padding: 0 1rem;
 }
@@ -17,6 +18,12 @@
   color: #08c3c2 !important;
 }
 
+.navbar-toggler-icon {
+}
+
 .nav-link {
   color: white !important;
-}/*# sourceMappingURL=HomeNavbar.css.map */
+}
+
+.homeNavbarLinks {
+}
