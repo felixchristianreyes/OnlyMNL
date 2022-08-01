@@ -1,7 +1,7 @@
 import React from "react";
 import "./Hero.css";
 import { Link } from "react-router-dom";
-import toiletfloating from "../../../images/toiletfloating.png";
+import toiletfloating from "/public/images/toiletfloating.png";
 
 const Hero = () => (
   <section id="hero" className="d-flex align-items-center" data-testid="Hero">

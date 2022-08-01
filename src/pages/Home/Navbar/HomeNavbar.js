@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import "./HomeNavbar.css";
 import { FaHamburger } from "react-icons/fa";
 import { classNames, useScrollPosition } from "../tools";
-import logo from "../../../images/logo.png";
+import logo from "/public/images/logo.png";
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";

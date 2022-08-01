@@ -1,7 +1,6 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React from "react";
 import "./AboutUs.css";
-import infographic from "../../../images/infographic.jpg";
 import { BsCheck } from "react-icons/bs";
 
 const AboutUs = () => (
@@ -35,9 +34,6 @@ const AboutUs = () => (
             Contact-us
           </a>
         </div>
-      </div>
-      <div className="row m-0 mt-5 infographic">
-        <img src={infographic} alt="5 Stages of Grief Infographic"></img>
       </div>
     </div>
   </section>
