@@ -1,47 +1,57 @@
+/* eslint-disable jsx-a11y/anchor-is-valid */
 import React from "react";
-import Container from "react-bootstrap/Container";
-import Nav from "react-bootstrap/Nav";
-import Navbar from "react-bootstrap/Navbar";
-import NavDropdown from "react-bootstrap/NavDropdown";
 import "./MainNav.css";
-import LoginRegister from "../LoginRegisterModal/LoginRegisterModal";
 
 const MainNav = () => {
   return (
-    <div className="mainNav">
-      <Navbar
-        sticky="top"
-        bg="dark"
-        variant="dark"
-        expand="lg"
-        datatest-id="MainNav"
-        className="navbar"
-      >
-        <Container>
-          <Navbar.Brand href="/" className="fs-3">GUSBAMPS</Navbar.Brand>
-          <Navbar.Toggle aria-controls="basic-navbar-nav" />
-          <Navbar.Collapse id="basic-navbar-nav">
-            <Nav className="me-auto">
-              <Nav.Link href="/">Home</Nav.Link>
-              <NavDropdown
-                variant="light"
-                title="Community"
-                id="basic-nav-dropdown"
-              >
-                <NavDropdown.Item href="#action/3.1">
-                  Join Discord
-                </NavDropdown.Item>
-                <NavDropdown.Item href="#action/3.2">Contact</NavDropdown.Item>
-                <NavDropdown.Item href="#action/3.3">
-                  Propose Location
-                </NavDropdown.Item>
-              </NavDropdown>
-            </Nav>
-            <LoginRegister />
-          </Navbar.Collapse>
-        </Container>
-      </Navbar>
-    </div>
+    <>
+      <header class="header" id="header">
+        <nav class="nav container">
+          <a href="#" class="nav__logo">
+            
+          </a>
+
+          <div class="nav__menu" id="nav-menu">
+            <ul class="nav__list">
+              <li class="nav__item">
+                <a href="#home" class="nav__link active-link">
+                  <i class="bx bx-home-alt nav__icon"></i>
+                  <span class="nav__name">Home</span>
+                </a>
+              </li>
+
+              <li class="nav__item">
+                <a href="#about" class="nav__link">
+                  <i class="bx bx-user nav__icon"></i>
+                  <span class="nav__name">About</span>
+                </a>
+              </li>
+
+              <li class="nav__item">
+                <a href="#skills" class="nav__link">
+                  <i class="bx bx-book-alt nav__icon"></i>
+                  <span class="nav__name">Skills</span>
+                </a>
+              </li>
+
+              <li class="nav__item">
+                <a href="#portfolio" class="nav__link">
+                  <i class="bx bx-briefcase-alt nav__icon"></i>
+                  <span class="nav__name">Portfolio</span>
+                </a>
+              </li>
+
+              <li class="nav__item">
+                <a href="#contactme" class="nav__link">
+                  <i class="bx bx-message-square-detail nav__icon"></i>
+                  <span class="nav__name">Contactme</span>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </nav>
+      </header>
+    </>
   );
 };
 

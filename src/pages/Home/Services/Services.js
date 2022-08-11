@@ -11,10 +11,6 @@ const Services = () => (
     <div className="container" data-aos="fade-up">
       <div className="section-title">
         <h2>Features</h2>
-        <p>
-          If you want to know more what our website can offer, please see the
-          cards below.
-        </p>
       </div>
 
       <div className="row">

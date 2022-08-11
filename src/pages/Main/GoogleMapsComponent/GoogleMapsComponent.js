@@ -46,13 +46,11 @@ function GoogleMapsComponent() {
   }
   return (
     <>
-      <h1 className="gmcH1">
-        Toilet Locator
-        <span role="img" aria-label="toilet">
-          🚽
-        </span>
-      </h1>
-
+      <div>
+        <h1 className="gmcH1 display-3 d-flex">
+          <button className="btn btn-warning btn-lg">Buy me a coffee</button>
+        </h1>
+      </div>
       <GoogleMap
         mapContainerClassName="mapStyle"
         center={center}
