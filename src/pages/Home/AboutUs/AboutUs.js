@@ -2,37 +2,28 @@
 import React from "react";
 import "./AboutUs.css";
 import { BsCheck } from "react-icons/bs";
+import Section from "../Section";
 
 const AboutUs = () => (
   <section id="about" className="about" data-testid="AboutUs">
     <div className="container" data-aos="fade-up">
-      <div className="section-title">
-        <h2>About Us</h2>
-      </div>
+      <Section text="About Us" />
+      
 
       <div className="row content">
         <div className="col-lg-6">
-          <p>A company that provides convenience in the face of crisis</p>
+          <p className="text-center">We are a lone company that provides modern solution for commuters, tourist or civilians</p>
           <ul>
             <li>
-              <BsCheck /> We have people scouting for public restrooms all over
-              the Phillippines
+              <BsCheck /> We think of unusual problems and provide modern solutions.
             </li>
             <li>
-              <BsCheck /> Local government offices provides us data to input on our database
+              <BsCheck /> Helping the community #1 is our goal.
             </li>
             <li>
-              <BsCheck /> Our website doesn't take convenience for the sake of monitary gains
+              <BsCheck /> Keeps the principles of to give is to recieve.
             </li>
           </ul>
-        </div>
-        <div className="col-lg-6 pt-4 pt-lg-0">
-          <p>
-            Please let us know we can be of service more, by contacting us.
-          </p>
-          <a href="#" className="btn-learn-more">
-            Contact-us
-          </a>
         </div>
       </div>
     </div>
