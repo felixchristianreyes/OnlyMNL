@@ -50,11 +50,6 @@ function GoogleMapsComponent() {
   //On Page Mount
   useEffect(() => {
     getLocation();
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(getCoordinates);
-    } else {
-      alert("Geolocation is not supported by this browser.");
-    }
   });
 
   // USER LOCATION
@@ -83,6 +78,7 @@ function GoogleMapsComponent() {
       >
         {/* Child components, such as markers, info windows, etc. */}
         <Marker position={center} />;
+
         {/* <Marker
           position={markers.marker1}
           icon={{
