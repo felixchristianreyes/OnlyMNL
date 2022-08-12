@@ -11,9 +11,9 @@ const AboutUs = () => (
       
 
       <div className="row content">
-        <div className="col-lg-6">
+        <div className="col-lg-12">
           <p className="text-center">We are a lone company that provides modern solution for commuters, tourist or civilians</p>
-          <ul>
+          <ul className="text-center">
             <li>
               <BsCheck /> We think of unusual problems and provide modern solutions.
             </li>

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./GoogleMapsComponent.css";
 import gMapStyles from "./mapStyles";
 import {
@@ -26,15 +26,44 @@ const markers = {
 const options = {
   styles: gMapStyles,
   disableDefaultUI: true,
-  zoomControl: true,
-};
-
-const center = {
-  lat: 14.552973,
-  lng: 121.073485,
+  zoomControl: false,
 };
 
 function GoogleMapsComponent() {
+  // GETS USER LOCATION
+  const [latitude, setLatitude] = useState();
+  const [longitude, setLongitude] = useState();
+
+  function getLocation() {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(getCoordinates);
+    } else {
+      alert("Geolocation is not supported by this browser.");
+    }
+  }
+
+  function getCoordinates(position) {
+    setLatitude(position.coords.latitude);
+    setLongitude(position.coords.longitude);
+  }
+
+  //On Page Mount
+  useEffect(() => {
+    getLocation();
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(getCoordinates);
+    } else {
+      alert("Geolocation is not supported by this browser.");
+    }
+  });
+
+  // USER LOCATION
+  const center = {
+    lat: latitude,
+    lng: longitude,
+  };
+
+  // GOOGLE MAP SETUP
   const [selected, setSelected] = useState(null);
 
   const { isLoaded } = useJsApiLoader({
@@ -46,21 +75,15 @@ function GoogleMapsComponent() {
   }
   return (
     <>
-      <div>
-        <h1 className="gmcH1 display-3 d-flex">
-          <button className="btn btn-warning btn-lg">Buy me a coffee</button>
-        </h1>
-      </div>
       <GoogleMap
         mapContainerClassName="mapStyle"
         center={center}
-        zoom={18}
+        zoom={20}
         options={options}
       >
         {/* Child components, such as markers, info windows, etc. */}
-        <Marker position={center} />
-
-        <Marker
+        <Marker position={center} />;
+        {/* <Marker
           position={markers.marker1}
           icon={{
             url: "/toiletIcon.svg",
@@ -89,9 +112,8 @@ function GoogleMapsComponent() {
           onClick={() => {
             setSelected(markers.marker3);
           }}
-        />
-
-        {selected ? (
+        /> */}
+        {/* {selected ? (
           <InfoWindow
             position={{ lat: selected.lat + 0.00001, lng: selected.lng }}
             onCloseClick={() => {
@@ -100,7 +122,7 @@ function GoogleMapsComponent() {
           >
             <MarkerInfo />
           </InfoWindow>
-        ) : null}
+        ) : null} */}
       </GoogleMap>
     </>
   );
