@@ -7,7 +7,7 @@
 }
 
 .navbar-toggler-icon {
-  background-image: url("/src/images/hamburger.svg") !important;
+  background-image: url("../../../images/hamburger.svg") !important;
 }
 
 .navbar-nav {

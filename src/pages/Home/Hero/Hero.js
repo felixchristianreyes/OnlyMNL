@@ -1,6 +1,6 @@
 import React from "react";
 import "./Hero.css";
-import toiletfloating from "/src/images/toiletfloating.png";
+import toiletfloating from "../../../images/toiletfloating.png";
 
 const Hero = () => {
   
