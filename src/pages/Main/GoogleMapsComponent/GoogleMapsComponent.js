@@ -5,23 +5,22 @@ import {
   useJsApiLoader,
   GoogleMap,
   Marker,
-  InfoWindow,
 } from "@react-google-maps/api";
-import MarkerInfo from "./MarkerInfo/MarkerInfo";
-const markers = {
-  marker1: {
-    lat: 14.55234,
-    lng: 121.073583,
-  },
-  marker2: {
-    lat: 14.551865,
-    lng: 121.074046,
-  },
-  marker3: {
-    lat: 14.55273,
-    lng: 121.073507,
-  },
-};
+// import MarkerInfo from "./MarkerInfo/MarkerInfo";
+// const markers = {
+//   marker1: {
+//     lat: 14.55234,
+//     lng: 121.073583,
+//   },
+//   marker2: {
+//     lat: 14.551865,
+//     lng: 121.074046,
+//   },
+//   marker3: {
+//     lat: 14.55273,
+//     lng: 121.073507,
+//   },
+// };
 
 const options = {
   styles: gMapStyles,
@@ -59,7 +58,7 @@ function GoogleMapsComponent() {
   };
 
   // GOOGLE MAP SETUP
-  const [selected, setSelected] = useState(null);
+  // const [selected, setSelected] = useState(null);
 
   const { isLoaded } = useJsApiLoader({
     googleMapsApiKey: "AIzaSyBJl-1Frpgrjv8FlvBj-Fr5kkbFA3mDNAc",

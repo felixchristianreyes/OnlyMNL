@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import "./Hero.css";
 import toiletfloating from "/src/images/toiletfloating.png";
 
