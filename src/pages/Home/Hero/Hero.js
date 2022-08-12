@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "./Hero.css";
-import toiletfloating from "/public/images/toiletfloating.png";
+import toiletfloating from "/src/images/toiletfloating.png";
 
 const Hero = () => {
   
