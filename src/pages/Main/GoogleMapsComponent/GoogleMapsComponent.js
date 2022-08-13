@@ -1,7 +1,12 @@
 import React, { useState, useEffect } from "react";
 import "./GoogleMapsComponent.css";
 import gMapStyles from "./mapStyles";
-import { useJsApiLoader, GoogleMap, Marker } from "@react-google-maps/api";
+import {
+  useJsApiLoader,
+  GoogleMap,
+  Marker,
+  DirectionsRenderer,
+} from "@react-google-maps/api";
 // import MarkerInfo from "./MarkerInfo/MarkerInfo";
 const markers = [
   {
@@ -27,8 +32,13 @@ function GoogleMapsComponent(props) {
   // GETS USER LOCATION
   const [latitude, setLatitude] = useState();
   const [longitude, setLongitude] = useState();
+
+  const [directionsResponse, setDirectionsResponse] = useState(null);
+  const [distance, setDistance] = useState("");
+  const [duration, setDuration] = useState("");
+
   // PAN TO USER CENTER
-  const [map, setMap] = useState(/** @type google.maps.Map */null);
+  const [map, setMap] = useState(/** @type google.maps.Map */ null);
 
   function getLocation() {
     if (navigator.geolocation) {
@@ -43,11 +53,30 @@ function GoogleMapsComponent(props) {
     setLongitude(position.coords.longitude);
   }
 
-  // MARKER CENTER // USER
-  const center = {
-    lat: latitude,
-    lng: longitude,
-  };
+  // CALCULATE ROUTE
+
+  async function calculateRoute() {
+    let start = center;
+    let end = markers[1];
+    // eslint-disable-next-line no-undef
+    let transportType = google.maps.TravelMode.WALKING;
+
+    // eslint-disable-next-line no-undef
+    const directionsService = new google.maps.DirectionsService();
+    const results = await directionsService.route({
+      origin: start,
+      destination: end,
+      // eslint-disable-next-line no-undef
+      travelMode: transportType,
+    });
+    setDirectionsResponse(results);
+    console.log(results);
+
+    // setDistance(results.routes[0].legs[0].distance.text);
+    // setDuration(results.routes[0].legs[0].duration.text);
+    alert(results.routes[0].legs[0].distance.text);
+    alert(results.routes[0].legs[0].duration.text);
+  }
 
   function getNearestMarker() {
     const lat1 = latitude;
@@ -91,7 +120,8 @@ function GoogleMapsComponent(props) {
 
   useEffect(() => {
     getLocation();
-    getNearestMarker();
+    // getNearestMarker();
+    // calculateRoute();
   }, []);
 
   // GOOGLE MAP SETUP
@@ -99,26 +129,34 @@ function GoogleMapsComponent(props) {
   const { isLoaded } = useJsApiLoader({
     googleMapsApiKey: "AIzaSyBJl-1Frpgrjv8FlvBj-Fr5kkbFA3mDNAc",
   });
+  // MARKER CENTER // USER
 
+  const center = {
+    lat: latitude,
+    lng: longitude,
+  };
   if (!isLoaded) {
     return <div>Maps loading...</div>;
   }
   //RENDERER
   return (
     <>
-    <button onClick={() => map.panTo(center)}>test</button>
+      <button onClick={calculateRoute}>test</button>
       <GoogleMap
         mapContainerClassName="mapStyle"
         center={center}
-        zoom={20}
+        zoom={19}
         options={options}
-        onLoad={map => setMap(map)}
+        onLoad={(map) => setMap(map)}
       >
         {/* Child components, such as markers, info windows, etc. */}
         <Marker position={center} />;
         <Marker position={markers[0]} />
         <Marker position={markers[1]} />
         <Marker position={markers[2]} />
+        {directionsResponse && (
+          <DirectionsRenderer directions={directionsResponse} />
+        )}
       </GoogleMap>
     </>
   );
