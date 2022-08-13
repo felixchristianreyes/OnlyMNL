@@ -7,7 +7,7 @@ import Home from "./pages/Home/Home";
 import Main from "./pages/Main/Main";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import ErrorPage from "./pages/ErrorPage";
-import UserLocation from "./pages/Main/UserLocation/UserLocation";
+import Form from "./pages/Form/Form";
 
 const App = () => {
   useEffect(() => {
@@ -22,7 +22,7 @@ const App = () => {
           <Route path="/" index element={<Home />} />
           <Route path="app" element={<Main />} />
           <Route path="*" element={<ErrorPage />} />
-          <Route path="nav" element={<UserLocation />} />
+          <Route path="form" element={<Form />} />
         </Routes>
       </BrowserRouter>
     </div>
