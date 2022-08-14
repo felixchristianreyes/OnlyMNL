@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import "./GoogleMapsComponent.css";
 import gMapStyles from "./mapStyles";
 import { useJsApiLoader, GoogleMap, Marker } from "@react-google-maps/api";
 
@@ -9,7 +8,7 @@ const options = {
   zoomControl: false,
 };
 
-function GoogleMapsComponent(props) {
+function GoogleMapsSelect(props) {
   // SET MARKER
   const [marker, setMarker] = useState({});
   // GETS USER LOCATION
@@ -56,37 +55,31 @@ function GoogleMapsComponent(props) {
   //RENDERER
   return (
     <>
-      {loading ? (
-        <div className="loader"></div>
-      ) : (
-        <>
-          <div>
-            <GoogleMap
-              mapContainerClassName="mapStyle"
-              center={center}
-              zoom={19}
-              options={options}
-              onLoad={(map) => setMap(map)}
-              //   SELECT GEOLOCATION ONCLICK
-              onClick={(event) => {
-                setMarker({ lat: event.latLng.lat(), lng: event.latLng.lng() });
-                console.log(marker);
-              }}
-            >
-              {/* Child components, such as markers, info windows, etc. */}
-              <Marker position={center} />;{/* SELECT GEOLOCATION MARKER */}
-              <Marker
-                position={{
-                  lat: marker.lat,
-                  lng: marker.lng,
-                }}
-              />
-            </GoogleMap>
-          </div>
-        </>
-      )}
+      <div>
+        <GoogleMap
+          mapContainerClassName="mapStyle"
+          center={center}
+          zoom={19}
+          options={options}
+          onLoad={(map) => setMap(map)}
+          //   SELECT GEOLOCATION ONCLICK
+          onClick={(event) => {
+            setMarker({ lat: event.latLng.lat(), lng: event.latLng.lng() });
+            console.log(marker);
+          }}
+        >
+          {/* Child components, such as markers, info windows, etc. */}
+          <Marker position={center} />;{/* SELECT GEOLOCATION MARKER */}
+          <Marker
+            position={{
+              lat: marker.lat,
+              lng: marker.lng,
+            }}
+          />
+        </GoogleMap>
+      </div>
     </>
   );
 }
 
-export default GoogleMapsComponent;
+export default GoogleMapsSelect;

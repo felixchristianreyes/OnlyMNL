@@ -1,11 +1,9 @@
 .findBtn {
   position: absolute;
   bottom: 1rem;
-  right: 0;
+  left: 50%;
+  transform: translate(-50%, -50%);
   z-index: 1001;
-}
-
-.fnBtn {
 }
 
 .loader {
