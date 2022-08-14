@@ -2,6 +2,7 @@ import HomeNavbar from "../Home/Navbar/HomeNavbar";
 import React, { useState, useEffect } from "react";
 import gMapStyles from "./mapStyles";
 import { useJsApiLoader, GoogleMap, Marker } from "@react-google-maps/api";
+import axios from "axios";
 
 const options = {
   styles: gMapStyles,
@@ -11,10 +12,10 @@ const options = {
 
 const Form = (props) => {
   // SET MARKER
+  const [markerData, setMarkerData] = useState("");
   const [marker, setMarker] = useState({});
   // GETS USER LOCATION
-  const [latitude, setLatitude] = useState();
-  const [longitude, setLongitude] = useState();
+  const [center, setCenter] = useState("");
 
   // PAN TO USER CENTER
   const [map, setMap] = useState(/** @type google.maps.Map */ null);
@@ -28,8 +29,10 @@ const Form = (props) => {
   }
 
   function getCoordinates(position) {
-    setLatitude(position.coords.latitude);
-    setLongitude(position.coords.longitude);
+    setCenter({
+      lat: parseFloat(position.coords.latitude),
+      lng: parseFloat(position.coords.longitude),
+    });
   }
 
   // MARKER CENTER // USER
@@ -48,11 +51,27 @@ const Form = (props) => {
     return <div>Maps loading...</div>;
   }
   //USER CENTER
-  const center = {
-    lat: latitude,
-    lng: longitude,
-  };
 
+  // FUNCTION TO POST
+  function handleInput(e) {
+    const markerInfo = {
+      [e.target.id]: e.target.value,
+      lat: marker.lat,
+      lng: marker.lng,
+    };
+    setMarkerData(markerInfo);
+    console.log(markerData);
+  }
+  async function postData(e) {
+    e.preventDefault();
+    const res = await axios.post(
+      "http://localhost:8000/api/add-markers",
+      markerData
+    );
+    if (res.data.status === 200) {
+      console.log(res.data.message);
+    }
+  }
   return (
     <>
       <HomeNavbar />
@@ -66,49 +85,50 @@ const Form = (props) => {
           //   SELECT GEOLOCATION ONCLICK
           onClick={(event) => {
             setMarker({ lat: event.latLng.lat(), lng: event.latLng.lng() });
-            console.log(marker);
           }}
         >
           {/* Child components, such as markers, info windows, etc. */}
-          <Marker position={center} />;{/* SELECT GEOLOCATION MARKER */}
+          <Marker position={center} />;
           <Marker
             position={{
-              lat: marker.lat,
-              lng: marker.lng,
+              lat: parseFloat(marker.lat),
+              lng: parseFloat(marker.lng),
             }}
           />
         </GoogleMap>
       </div>
       <div className="container">
         <h1>Marker Data Form</h1>
-        <form>
+        <form onSubmit={postData}>
           <div className="form-group">
             <label>Name</label>
             <input
               type="text"
               className="form-control"
               id="name"
-              aria-describedby="nameHelp"
               placeholder="Enter name"
+              onChange={handleInput}
             />
 
             <label>Latitude</label>
             <input
               disabled
-              type="number"
+              type="text"
               className="form-control"
-              id="lat"
+              id="text"
               placeholder="Select a marker"
               value={marker.lat}
+
             />
             <label>Longitude</label>
             <input
               disabled
-              type="number"
+              type="text"
               className="form-control"
               id="lng"
               placeholder="Select a marker"
               value={marker.lng}
+
             />
           </div>
 

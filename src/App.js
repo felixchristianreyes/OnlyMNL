@@ -23,7 +23,7 @@ const App = () => {
           <Route path="/" index element={<Home />} />
           <Route path="app" element={<Main />} />
           <Route path="*" element={<ErrorPage />} />
-          <Route path="form" element={<Form />} />
+          <Route path="add-markers" element={<Form />} />
         </Routes>
       </BrowserRouter>
     </div>

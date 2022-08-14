@@ -27,8 +27,9 @@ function GoogleMapsSelect(props) {
   }
 
   function getCoordinates(position) {
-    setLatitude(position.coords.latitude);
-    setLongitude(position.coords.longitude);
+    console.log('getCoordinates',position);
+    setLatitude(parseFloat(position.coords.latitude));
+    setLongitude(parseFloat(position.coords.longitude));
   }
 
   // MARKER CENTER // USER
@@ -48,8 +49,8 @@ function GoogleMapsSelect(props) {
   }
   //USER CENTER
   const center = {
-    lat: latitude,
-    lng: longitude,
+    lat: parseFloat(latitude),
+    lng: parseFloat(longitude),
   };
 
   //RENDERER
@@ -65,17 +66,16 @@ function GoogleMapsSelect(props) {
           //   SELECT GEOLOCATION ONCLICK
           onClick={(event) => {
             setMarker({ lat: event.latLng.lat(), lng: event.latLng.lng() });
-            console.log(marker);
           }}
         >
           {/* Child components, such as markers, info windows, etc. */}
           <Marker position={center} />;{/* SELECT GEOLOCATION MARKER */}
-          <Marker
+          {/* <Marker
             position={{
-              lat: marker.lat,
-              lng: marker.lng,
+              lat: parseFloat(marker.lat),
+              lng: parseFloat(marker.lng),
             }}
-          />
+          /> */}
         </GoogleMap>
       </div>
     </>
