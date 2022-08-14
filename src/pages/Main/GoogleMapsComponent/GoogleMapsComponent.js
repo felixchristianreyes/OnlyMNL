@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from "react";
 import "./GoogleMapsComponent.css";
 import gMapStyles from "./mapStyles";
+import PuffLoader from "react-spinners/PuffLoader";
 import {
   useJsApiLoader,
   GoogleMap,
   Marker,
   DirectionsRenderer,
 } from "@react-google-maps/api";
-// import MarkerInfo from "./MarkerInfo/MarkerInfo";
 const markers = [
   {
     lat: 14.699684,
@@ -17,11 +17,8 @@ const markers = [
     lat: 14.699805,
     lng: 121.103929,
   },
-  {
-    lat: 14.700111,
-    lng: 121.104133,
-  },
 ];
+
 const options = {
   styles: gMapStyles,
   disableDefaultUI: true,
@@ -29,9 +26,14 @@ const options = {
 };
 
 function GoogleMapsComponent(props) {
+  // SET MARKER
+  const [marker, setMarker] = useState({});
+  // LOADER
+  const [loading, setLoading] = useState(false);
   // GETS USER LOCATION
   const [latitude, setLatitude] = useState();
   const [longitude, setLongitude] = useState();
+  // SETS ROUTE
 
   const [directionsResponse, setDirectionsResponse] = useState(null);
   const [distance, setDistance] = useState("");
@@ -53,30 +55,18 @@ function GoogleMapsComponent(props) {
     setLongitude(position.coords.longitude);
   }
 
-  // CALCULATE ROUTE
+  // MARKER CENTER // USER
 
-  async function calculateRoute() {
-    let start = center;
-    let end = markers[1];
-    // eslint-disable-next-line no-undef
-    let transportType = google.maps.TravelMode.WALKING;
-
-    // eslint-disable-next-line no-undef
-    const directionsService = new google.maps.DirectionsService();
-    const results = await directionsService.route({
-      origin: start,
-      destination: end,
-      // eslint-disable-next-line no-undef
-      travelMode: transportType,
-    });
-    setDirectionsResponse(results);
-    console.log(results);
-
-    // setDistance(results.routes[0].legs[0].distance.text);
-    // setDuration(results.routes[0].legs[0].duration.text);
-    alert(results.routes[0].legs[0].distance.text);
-    alert(results.routes[0].legs[0].duration.text);
-  }
+  useEffect(() => {
+    //LOADING SPINNER FOR 8 SECONDS
+    getLocation();
+    getNearestMarker();
+    setLoading(true);
+    setTimeout(() => {
+      setLoading(false);
+    }, 5000);
+    // AFTER SPINNER LOADS, GENERATE ROUTE FROM A TO B
+  }, []);
 
   function getNearestMarker() {
     const lat1 = latitude;
@@ -115,49 +105,95 @@ function GoogleMapsComponent(props) {
     }
 
     // (debug) The closest marker is:
-    console.log(markers[closest]);
+    return markers[closest];
   }
-
-  useEffect(() => {
-    getLocation();
-    // getNearestMarker();
-    // calculateRoute();
-  }, []);
-
+  async function calculateRoute() {
+    let start = center;
+    let end = getNearestMarker();
+    // eslint-disable-next-line no-undef
+    let transportType = google.maps.TravelMode.WALKING;
+    // eslint-disable-next-line no-undef
+    const directionsService = new google.maps.DirectionsService();
+    const results = await directionsService.route({
+      origin: start,
+      destination: end,
+      // eslint-disable-next-line no-undef
+      travelMode: transportType,
+    });
+    setDirectionsResponse(results);
+    console.log(results);
+    // setDistance(results.routes[0].legs[0].distance.text);
+    // setDuration(results.routes[0].legs[0].duration.text);
+    alert(results.routes[0].legs[0].distance.text);
+    alert(results.routes[0].legs[0].duration.text);
+  }
   // GOOGLE MAP SETUP
 
   const { isLoaded } = useJsApiLoader({
     googleMapsApiKey: "AIzaSyBJl-1Frpgrjv8FlvBj-Fr5kkbFA3mDNAc",
   });
-  // MARKER CENTER // USER
 
+  if (!isLoaded) {
+    return <div>Maps loading...</div>;
+  }
+  //USER CENTER
   const center = {
     lat: latitude,
     lng: longitude,
   };
-  if (!isLoaded) {
-    return <div>Maps loading...</div>;
-  }
+
   //RENDERER
   return (
     <>
-      <button onClick={calculateRoute}>test</button>
-      <GoogleMap
-        mapContainerClassName="mapStyle"
-        center={center}
-        zoom={19}
-        options={options}
-        onLoad={(map) => setMap(map)}
-      >
-        {/* Child components, such as markers, info windows, etc. */}
-        <Marker position={center} />;
-        <Marker position={markers[0]} />
-        <Marker position={markers[1]} />
-        <Marker position={markers[2]} />
-        {directionsResponse && (
-          <DirectionsRenderer directions={directionsResponse} />
-        )}
-      </GoogleMap>
+      {loading ? (
+        <div className="loader">
+          <div className="d-flex flex-column">
+            <PuffLoader color="aqua" loading={loading} size={100} />
+          </div>
+        </div>
+      ) : (
+        <>
+          <div className="findBtn">
+            <button
+              className="btn btn-primary fnBtn"
+              onClick={() => {
+                calculateRoute();
+              }}
+            >
+              Find Nearest
+            </button>
+          </div>
+          <div>
+            <GoogleMap
+              mapContainerClassName="mapStyle"
+              center={center}
+              zoom={19}
+              options={options}
+              onLoad={(map) => setMap(map)}
+              // SELECT GEOLOCATION ONCLICK
+              // onClick={(event) => {
+              //   setMarker({lat: event.latLng.lat(), lng: event.latLng.lng()});
+              //   console.log(marker);
+              // }}
+            >
+              {/* Child components, such as markers, info windows, etc. */}
+              <Marker position={center} />;
+              <Marker position={markers[0]} />
+              <Marker position={markers[1]} />
+              {/* SELECT GEOLOCATION MARKER */}
+              {/* <Marker
+                position={{
+                  lat: marker.lat,
+                  lng: marker.lng,
+                }}
+              /> */}
+              {directionsResponse && (
+                <DirectionsRenderer directions={directionsResponse} />
+              )}
+            </GoogleMap>
+          </div>
+        </>
+      )}
     </>
   );
 }

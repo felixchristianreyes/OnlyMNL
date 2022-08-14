@@ -8,6 +8,7 @@ import Main from "./pages/Main/Main";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import ErrorPage from "./pages/ErrorPage";
 import Form from "./pages/Form/Form";
+import HomeNavbar from "./pages/Home/Navbar/HomeNavbar";
 
 const App = () => {
   useEffect(() => {
