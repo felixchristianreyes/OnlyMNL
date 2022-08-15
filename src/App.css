@@ -4,7 +4,6 @@
 
 body {
   font-family: "Open Sans", sans-serif;
-  color: #444444;
 }
 
 a {
@@ -25,6 +24,7 @@ h5,
 h6 {
   font-family: "Jost", sans-serif;
 }
+
 
 /* Preloader */
 
@@ -110,10 +110,6 @@ section {
   overflow: hidden;
 }
 
-.section-bg {
-  background-color: #f3f5fa;
-}
-
 .section-title {
   text-align: center;
   padding-bottom: 30px;
@@ -125,7 +121,6 @@ section {
   margin-bottom: 20px;
   padding-bottom: 20px;
   position: relative;
-  color: #37517e;
 }
 .section-title h2::before {
   content: "";

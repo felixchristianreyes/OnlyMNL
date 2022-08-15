@@ -13,12 +13,12 @@ const options = {
 const Form = (props) => {
   // SET MARKER
   const [markerData, setMarkerData] = useState("");
-  const [marker, setMarker] = useState({});
+  const [marker, setMarker] = useState("");
+  console.log(marker);
   // GETS USER LOCATION
-  const [center, setCenter] = useState("");
-
+  const [center, setCenter] = useState();
+  console.log(center);
   // PAN TO USER CENTER
-  const [map, setMap] = useState(/** @type google.maps.Map */ null);
 
   function getLocation() {
     if (navigator.geolocation) {
@@ -60,7 +60,6 @@ const Form = (props) => {
       lng: marker.lng,
     };
     setMarkerData(markerInfo);
-    console.log(markerData);
   }
   async function postData(e) {
     e.preventDefault();
@@ -81,7 +80,6 @@ const Form = (props) => {
           center={center}
           zoom={19}
           options={options}
-          onLoad={(map) => setMap(map)}
           //   SELECT GEOLOCATION ONCLICK
           onClick={(event) => {
             setMarker({ lat: event.latLng.lat(), lng: event.latLng.lng() });
@@ -117,8 +115,7 @@ const Form = (props) => {
               className="form-control"
               id="text"
               placeholder="Select a marker"
-              value={marker.lat}
-
+              defaultValue={marker.lat}
             />
             <label>Longitude</label>
             <input
@@ -127,8 +124,7 @@ const Form = (props) => {
               className="form-control"
               id="lng"
               placeholder="Select a marker"
-              value={marker.lng}
-
+              defaultValue={marker.lng}
             />
           </div>
 

@@ -10,7 +10,7 @@ const Services = () => (
   <section id="services" className="services section-bg" data-testid="Services">
     <div className="container" data-aos="fade-up">
       <div className="section-title">
-        <h2>Features</h2>
+        <h2>You are a...</h2>
       </div>
 
       <div className="row">

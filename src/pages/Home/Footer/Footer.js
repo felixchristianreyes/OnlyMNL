@@ -9,7 +9,7 @@ const Footer = () => (
       <div className="container">
         <div className="row">
           <div className="col-lg-3 col-md-6 footer-contact">
-            <h3>Gusbamps</h3>
+            <h3>Only Manila</h3>
             <p>
               0601 Pluto St <br />
               Bacoor, Cavite 4102
@@ -18,7 +18,7 @@ const Footer = () => (
               <br />
               <strong>Phone:</strong> +639 454 896 481
               <br />
-              <strong>Email:</strong> gusbamps.company@gmail.com
+              <strong>Email:</strong> onlymanila.company@gmail.com
               <br />
             </p>
           </div>
@@ -107,9 +107,9 @@ const Footer = () => (
 
     <div className="container footer-bottom clearfix">
       <div className="copyright">
-        &copy; Copyright{" "}
+        &copy; Copyright
         <strong>
-          <span>Gusbamps</span>
+          <span>Only Manila</span>
         </strong>
         . All Rights Reserved
       </div>

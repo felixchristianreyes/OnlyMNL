@@ -1,39 +1,69 @@
+/* eslint-disable jsx-a11y/anchor-is-valid */
+/* eslint-disable jsx-a11y/alt-text */
 import React from "react";
 import "./Hero.css";
-import toiletfloating from "../../../images/toiletfloating.png";
+import { BsSearch } from "react-icons/bs";
 
 const Hero = () => {
-  
   return (
-    <section id="hero" className="d-flex align-items-center" data-testid="Hero">
-      <div className="container">
-        <div className="row">
-          <div
-            className="col-lg-7 d-flex flex-column justify-content-center pt-4 pt-lg-0 order-2 order-lg-1"
-            data-aos="fade-up"
-            data-aos-delay="200"
-          >
-            <h1>Find your comfort in just a click</h1>
-            <h2>
-              Community generated public restrooms. <br />
-              By the people for the people.
-            </h2>
-            <div className="d-flex justify-content-center justify-content-lg-start">
-              <a href="app" className="nav-link btn-get-started scrollto">
-                Find A Toilet
-              </a>
+    <section
+      id="hero"
+      className="d-flex align-items-center pb-5 m-0"
+      data-testid="Hero"
+    >
+      <div class="container">
+        <div class="row d-flex justify-content-center">
+          <div class="col-md-9">
+            <div class="card p-4 mt-3 rounded-pill">
+              <h3 class="heading my-4 text-center">
+                What are you looking for?
+              </h3>
+              <div class="d-flex justify-content-center px-5">
+                <div class="input-group input-group-lg">
+                  <span
+                    class="input-group-text text-white onlyLeft"
+                    id="inputGroup-sizing-lg"
+                  >
+                    ONLY/
+                  </span>
+                  <input
+                    type="text"
+                    class="form-control"
+                    aria-label="Sizing example input"
+                    aria-describedby="inputGroup-sizing-lg"
+                  />
+                  <a href="#" class="search-icon">
+                    <BsSearch />
+                  </a>
+                </div>
+              </div>
+              <div class="row mt-4 g-1 px-4 mb-5">
+                <div class="col-md-4 col-sm-6">
+                  <div class="card-inner p-3 d-flex flex-column align-items-center">
+                    <img src="https://i.imgur.com/Z7BJ8Po.png" width="50" />
+                    <div class="text-center mg-text">
+                      <span class="mg-text">Comfort Room</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-4 col-sm-6">
+                  <div class="card-inner p-3 d-flex flex-column align-items-center">
+                    <img src="https://i.imgur.com/YLsQrn3.png" width="50" />
+                    <div class="text-center mg-text">
+                      <span class="mg-text">Karinderya</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-4 col-sm-6">
+                  <div class="card-inner p-3 d-flex flex-column align-items-center">
+                    <img src="https://i.imgur.com/YLsQrn3.png" width="50" />
+                    <div class="text-center mg-text">
+                      <span class="mg-text">Bars</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
-          </div>
-          <div
-            className="col-lg-5 order-1 order-lg-2 hero-img"
-            data-aos="zoom-in"
-            data-aos-delay="200"
-          >
-            <img
-              src={toiletfloating}
-              className="img-fluid animated"
-              alt="toilet"
-            />
           </div>
         </div>
       </div>

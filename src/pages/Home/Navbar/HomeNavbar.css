@@ -3,26 +3,24 @@
   top: 0;
   position: -webkit-sticky;
   position: sticky;
-  background-color: #37517e;
-}
-
-.navbar-toggler-icon {
-  background-image: url("../../../images/hamburger.svg") !important;
+  background-color: #de144d;
 }
 
 .navbar-nav {
   align-items: center !important;
-  background-color: rgba(10, 204, 203, 0.1294117647) !important;
-  border-radius: 20px;
   padding: 0 1rem;
 }
 
 .navbar-toggler {
   color: #08c3c2 !important;
-  background-color: #480948 !important;
+  background-color: #ffffff !important;
   border: none !important;
 }
 
 .nav-link {
   color: white !important;
-}/*# sourceMappingURL=HomeNavbar.css.map */
+} /*# sourceMappingURL=HomeNavbar.css.map */
+
+.navbarLogo {
+  width: 50px;
+}
