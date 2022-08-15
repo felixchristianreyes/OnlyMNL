@@ -18,7 +18,7 @@ const HomeNavbar = () => {
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
             <Nav.Link href="/">Home</Nav.Link>
-            <Nav.Link href="add-markers">Marker Form</Nav.Link>
+            <Nav.Link href="add-markers">Add Marker</Nav.Link>
             <Nav.Link href="app">Find Toilet</Nav.Link>
             <NavDropdown
               variant="light"

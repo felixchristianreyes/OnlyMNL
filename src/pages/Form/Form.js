@@ -1,23 +1,19 @@
 import HomeNavbar from "../Home/Navbar/HomeNavbar";
 import React, { useState, useEffect } from "react";
-import gMapStyles from "./mapStyles";
 import { useJsApiLoader, GoogleMap, Marker } from "@react-google-maps/api";
 import axios from "axios";
 
 const options = {
-  styles: gMapStyles,
   disableDefaultUI: true,
   zoomControl: false,
 };
 
 const Form = (props) => {
   // SET MARKER
-  const [markerData, setMarkerData] = useState("");
+  const [markerData, setMarkerData] = useState([]);
   const [marker, setMarker] = useState("");
-  console.log(marker);
   // GETS USER LOCATION
   const [center, setCenter] = useState();
-  console.log(center);
   // PAN TO USER CENTER
 
   function getLocation() {
@@ -60,6 +56,7 @@ const Form = (props) => {
       lng: marker.lng,
     };
     setMarkerData(markerInfo);
+    console.log(markerInfo);
   }
   async function postData(e) {
     e.preventDefault();
@@ -74,64 +71,77 @@ const Form = (props) => {
   return (
     <>
       <HomeNavbar />
-      <div className="">
-        <GoogleMap
-          mapContainerClassName="mapStyle"
-          center={center}
-          zoom={19}
-          options={options}
-          //   SELECT GEOLOCATION ONCLICK
-          onClick={(event) => {
-            setMarker({ lat: event.latLng.lat(), lng: event.latLng.lng() });
-          }}
-        >
-          {/* Child components, such as markers, info windows, etc. */}
-          <Marker position={center} />;
-          <Marker
-            position={{
-              lat: parseFloat(marker.lat),
-              lng: parseFloat(marker.lng),
-            }}
-          />
-        </GoogleMap>
-      </div>
-      <div className="container">
-        <h1>Marker Data Form</h1>
-        <form onSubmit={postData}>
-          <div className="form-group">
-            <label>Name</label>
-            <input
-              type="text"
-              className="form-control"
-              id="name"
-              placeholder="Enter name"
-              onChange={handleInput}
-            />
+      <div className="p-0 mt-5 container">
+        <div className="card p-5">
+          <h1>Marker Data Form</h1>
+          <form onSubmit={postData}>
+            <div className="form-group">
+              <div className="mb-4">
+                <label>Latitude</label>
+                <input
+                  disabled
+                  type="text"
+                  className="form-control"
+                  id="lat"
+                  placeholder="Select a marker"
+                  defaultValue={marker.lat}
+                  onChange={handleInput}
+                />
+              </div>
+              <div className="mb-4">
+                <label>Longitude</label>
+                <input
+                  disabled
+                  type="text"
+                  className="form-control"
+                  id="lng"
+                  placeholder="Select a marker"
+                  defaultValue={marker.lng}
+                  onChange={handleInput}
+                />
+              </div>
+              <div className="mb-4">
+                <label>Marker Type</label>
+                <select
+                  id="type"
+                  className="form-select"
+                  aria-label="Default select example"
+                  onChange={handleInput}
+                >
+                  <option defaultValue>Choose a place type</option>
+                  <option value="1">Bars</option>
+                  <option value="2">Comfort Room</option>
+                  <option value="3">Karinderya</option>
+                </select>
+              </div>
+            </div>
 
-            <label>Latitude</label>
-            <input
-              disabled
-              type="text"
-              className="form-control"
-              id="text"
-              placeholder="Select a marker"
-              defaultValue={marker.lat}
-            />
-            <label>Longitude</label>
-            <input
-              disabled
-              type="text"
-              className="form-control"
-              id="lng"
-              placeholder="Select a marker"
-              defaultValue={marker.lng}
-            />
+            <button type="submit" className="btn btn-primary mb-5">
+              Submit
+            </button>
+          </form>
+          <div className="card p-5 h-50">
+            <GoogleMap
+              mapContainerClassName="mapStyle"
+              center={center}
+              zoom={19}
+              options={options}
+              //   SELECT GEOLOCATION ONCLICK
+              onClick={(event) => {
+                setMarker({ lat: event.latLng.lat(), lng: event.latLng.lng() });
+              }}
+            >
+              {/* Child components, such as markers, info windows, etc. */}
+              <Marker position={center} />;
+              <Marker
+                position={{
+                  lat: parseFloat(marker.lat),
+                  lng: parseFloat(marker.lng),
+                }}
+              />
+            </GoogleMap>
           </div>
-
-          <button type="submit" className="btn btn-primary">
-            Submit
-          </button>
-        </form>
+        </div>
       </div>
     </>
   );

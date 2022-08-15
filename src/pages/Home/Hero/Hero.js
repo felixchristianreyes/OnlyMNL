@@ -3,6 +3,9 @@
 import React from "react";
 import "./Hero.css";
 import { BsSearch } from "react-icons/bs";
+import bar from "/src/images/icons/bar.png";
+import toilet from "/src/images/icons/toilet.png";
+import store from "/src/images/icons/store.png";
 
 const Hero = () => {
   return (
@@ -11,56 +14,62 @@ const Hero = () => {
       className="d-flex align-items-center pb-5 m-0"
       data-testid="Hero"
     >
-      <div class="container">
-        <div class="row d-flex justify-content-center">
-          <div class="col-md-9">
-            <div class="card p-4 mt-3 rounded-pill">
-              <h3 class="heading my-4 text-center">
+      <div className="container">
+        <div className="row d-flex justify-content-center">
+          <div className="col-md-9">
+            <div className="card p-4 mt-3 rounded-pill">
+              <h3 className="heading my-4 text-center">
                 What are you looking for?
               </h3>
-              <div class="d-flex justify-content-center px-5">
-                <div class="input-group input-group-lg">
+              <div className="d-flex justify-content-center px-5">
+                <div className="input-group input-group-lg">
                   <span
-                    class="input-group-text text-white onlyLeft"
+                    className="input-group-text text-white onlyLeft"
                     id="inputGroup-sizing-lg"
                   >
                     ONLY/
                   </span>
                   <input
                     type="text"
-                    class="form-control"
+                    className="form-control"
                     aria-label="Sizing example input"
                     aria-describedby="inputGroup-sizing-lg"
                   />
-                  <a href="#" class="search-icon">
+                  <a href="#" className="search-icon">
                     <BsSearch />
                   </a>
                 </div>
               </div>
-              <div class="row mt-4 g-1 px-4 mb-5">
-                <div class="col-md-4 col-sm-6">
-                  <div class="card-inner p-3 d-flex flex-column align-items-center">
-                    <img src="https://i.imgur.com/Z7BJ8Po.png" width="50" />
-                    <div class="text-center mg-text">
-                      <span class="mg-text">Comfort Room</span>
+              <div className="row mt-4 g-1 px-4 mb-5">
+                <div className="col-md-4 col-sm-6">
+                  <a href="cr">
+                    <div className="card-inner p-3 d-flex flex-column align-items-center">
+                      <img src={toilet} />
+                      <div className="text-center mg-text">
+                        <span className="mg-text text-dark">Comfort Room</span>
+                      </div>
                     </div>
-                  </div>
+                  </a>
                 </div>
-                <div class="col-md-4 col-sm-6">
-                  <div class="card-inner p-3 d-flex flex-column align-items-center">
-                    <img src="https://i.imgur.com/YLsQrn3.png" width="50" />
-                    <div class="text-center mg-text">
-                      <span class="mg-text">Karinderya</span>
+                <div className="col-md-4 col-sm-6">
+                  <a href="karinderya">
+                    <div className="card-inner p-3 d-flex flex-column align-items-center">
+                      <img src={store} width="50" />
+                      <div className="text-center mg-text">
+                        <span className="mg-text text-dark">Karinderya</span>
+                      </div>
                     </div>
-                  </div>
+                  </a>
                 </div>
-                <div class="col-md-4 col-sm-6">
-                  <div class="card-inner p-3 d-flex flex-column align-items-center">
-                    <img src="https://i.imgur.com/YLsQrn3.png" width="50" />
-                    <div class="text-center mg-text">
-                      <span class="mg-text">Bars</span>
+                <div className="col-md-4 col-sm-6">
+                  <a href="bars">
+                    <div className="card-inner p-3 d-flex flex-column align-items-center">
+                      <img src={bar} width="50" />
+                      <div className="text-center mg-text">
+                        <span className="mg-text text-dark">Bars</span>
+                      </div>
                     </div>
-                  </div>
+                  </a>
                 </div>
               </div>
             </div>
