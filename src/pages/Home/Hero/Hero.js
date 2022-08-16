@@ -62,7 +62,7 @@ const Hero = () => {
                   </a>
                 </div>
                 <div className="col-md-4 col-sm-6">
-                  <a href="bars">
+                  <a href="bar">
                     <div className="card-inner p-3 d-flex flex-column align-items-center">
                       <img src={bar} width="50" />
                       <div className="text-center mg-text">

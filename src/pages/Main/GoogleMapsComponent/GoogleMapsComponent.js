@@ -2,7 +2,9 @@ import React, { useState, useEffect } from "react";
 import "./GoogleMapsComponent.css";
 import gMapStyles from "./mapStyles";
 import PuffLoader from "react-spinners/PuffLoader";
-import crIcon from "../../../images/icons/crIcon.svg";
+import toiletIcon from "../../../images/icons/toilet.png";
+import barIcon from "../../../images/icons/bar.png";
+import storeIcon from "../../../images/icons/store.png";
 import {
   useJsApiLoader,
   GoogleMap,
@@ -10,6 +12,7 @@ import {
   DirectionsRenderer,
 } from "@react-google-maps/api";
 import axios from "axios";
+import { AiFillPropertySafety } from "react-icons/ai";
 
 const options = {
   styles: gMapStyles,
@@ -18,6 +21,7 @@ const options = {
 };
 
 function GoogleMapsComponent(props) {
+  const [icon, setIcon] = useState();
   const { isLoaded } = useJsApiLoader({
     googleMapsApiKey: "AIzaSyBJl-1Frpgrjv8FlvBj-Fr5kkbFA3mDNAc",
   });
@@ -50,11 +54,25 @@ function GoogleMapsComponent(props) {
   async function getData() {
     const res = await axios.get("http://localhost:8000/api/markers");
     if (res.data.status === 200) {
-      setMarker(res.data.data);
-      console.log(res.data.data);
+      const oldMarkers = res.data.data;
+      const newMarkers = [];
+      oldMarkers.forEach((element) => {
+        //1. BARS 2. TOILET. 3. STORE
+        if (element.type === `${props.type}`) {
+          newMarkers.push(element);
+        }
+        if (props.type === "1") {
+          setIcon(barIcon);
+        } else if (props.type === "2") {
+          setIcon(toiletIcon);
+        } else if (props.type === "3") {
+          setIcon(storeIcon);
+        }
+      });
+      console.log("newMarkers" + newMarkers);
+      setMarker(newMarkers);
+      console.log(oldMarkers);
     }
-
-
   }
 
   function getNearestMarker() {
@@ -170,7 +188,7 @@ function GoogleMapsComponent(props) {
                     lng: parseFloat(markers.lng),
                   }}
                   icon={{
-                    url: `${crIcon}`,
+                    url: `${icon}`,
                     scaledSize: new window.google.maps.Size(30, 30),
                     origin: new window.google.maps.Point(0, 0),
                   }}

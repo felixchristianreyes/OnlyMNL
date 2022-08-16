@@ -3,10 +3,10 @@ import "./Main.css";
 import GoogleMapsComponent from "./GoogleMapsComponent/GoogleMapsComponent";
 import HomeNavbar from "../Home/Navbar/HomeNavbar";
 
-const Main = () => (
+const Main = (props) => (
   <>
     <HomeNavbar />
-    <GoogleMapsComponent />
+    <GoogleMapsComponent type={props.type} />
   </>
 );
 

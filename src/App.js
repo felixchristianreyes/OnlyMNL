@@ -21,7 +21,10 @@ const App = () => {
       <BrowserRouter>
         <Routes>
           <Route path="/" index element={<Home />} />
-          <Route path="cr" element={<Main />} />
+          <Route path="bar" element={<Main type="1" />} />
+          <Route path="cr" element={<Main type="2" />} />
+          <Route path="karinderya" element={<Main type="3" />} />
+
           <Route path="*" element={<ErrorPage />} />
           <Route path="add-markers" element={<Form />} />
         </Routes>

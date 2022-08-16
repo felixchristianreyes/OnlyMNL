@@ -16,7 +16,7 @@ const Footer = () => (
               <br />
               Phillippines <br />
               <br />
-              <strong>Phone:</strong> +639 454 896 481
+              <strong>Phone:</strong> +639 454 896 480
               <br />
               <strong>Email:</strong> onlymanila.company@gmail.com
               <br />
