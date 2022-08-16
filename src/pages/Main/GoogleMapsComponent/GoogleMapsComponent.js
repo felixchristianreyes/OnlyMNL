@@ -53,6 +53,8 @@ function GoogleMapsComponent(props) {
       setMarker(res.data.data);
       console.log(res.data.data);
     }
+
+
   }
 
   function getNearestMarker() {

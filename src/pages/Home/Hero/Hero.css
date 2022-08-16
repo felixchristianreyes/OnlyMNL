@@ -97,3 +97,9 @@ a:link {
 .mg-text {
   line-height: 14px;
 }
+
+@media only screen and (max-width: 426px) {
+  .search12 {
+    display: none !important;
+  }
+}

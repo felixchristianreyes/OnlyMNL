@@ -109,7 +109,7 @@ const Footer = () => (
       <div className="copyright">
         &copy; Copyright
         <strong>
-          <span>Only Manila</span>
+          <span> Only Manila</span>
         </strong>
         . All Rights Reserved
       </div>

@@ -21,7 +21,7 @@ const Hero = () => {
               <h3 className="heading my-4 text-center">
                 What are you looking for?
               </h3>
-              <div className="d-flex justify-content-center px-5">
+              <div className="d-flex justify-content-center px-5 search12">
                 <div className="input-group input-group-lg">
                   <span
                     className="input-group-text text-white onlyLeft"
