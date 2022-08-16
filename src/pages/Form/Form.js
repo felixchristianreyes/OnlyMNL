@@ -49,32 +49,37 @@ const Form = () => {
 
   // FUNCTION TO POST
   function handleInput(e) {
-    const markerInfo = {
-      [e.target.id]: e.target.value,
-      lat: marker.lat,
-      lng: marker.lng,
-    };
-
-    if (e.target.id === "type" && e.target.value === "1") {
+    if (e.target.value === "1") {
       setGoogleIcon(bar);
-    } else if (e.target.id === "type" && e.target.value === "2") {
+    } else if (e.target.value === "2") {
       setGoogleIcon(toilet);
-    } else if (e.target.id === "type" && e.target.value === "3") {
+    } else if (e.target.value === "3") {
       setGoogleIcon(store);
-    } else {
     }
-
-    setMarkerData(markerInfo);
-    console.log(markerInfo);
   }
+
   async function postData(e) {
     e.preventDefault();
+    const markerInfo = {
+      address: e.target.address.value,
+      lat: e.target.lat.value,
+      lng: e.target.lng.value,
+      type: e.target.type.value,
+    };
+    setMarkerData(markerInfo);
+    // console.log("postData", e.target.address.value);
+    // console.log("postData", e.target.lat.value);
+    // console.log("postData", e.target.lng.value);
+    // console.log("postData", e.target.type.value);
+    // console.log(markerInfo);
+
     const res = await axios.post(
       "http://localhost:8000/api/add-markers",
       markerData
     );
     if (res.data.status === 200) {
       console.log(res.data.message);
+      alert("Submitted Successfully");
     }
   }
   return (
@@ -83,34 +88,41 @@ const Form = () => {
       <div className="p-0 mt-5 container">
         <div className="card p-5">
           <h1>Marker Data Form</h1>
-          <form onSubmit={postData}>
+          <form name="addressForm" onSubmit={postData}>
             <div className="form-group">
               <div className="mb-4">
-                <label>Latitude</label>
+                <label>Address</label>
                 <input
                   type="text"
                   className="form-control"
-                  id="lat"
+                  name="address"
+                  placeholder="Ex. 121 Don Zulwetta St, QC"
+                />
+                <label>Latitude</label>
+                <input
+                  disabled
+                  type="text"
+                  className="form-control"
+                  name="lat"
                   placeholder="Select a marker"
                   defaultValue={marker.lat}
-                  onChange={handleInput}
                 />
               </div>
               <div className="mb-4">
                 <label>Longitude</label>
                 <input
+                  disabled
                   type="text"
                   className="form-control"
-                  id="lng"
+                  name="lng"
                   placeholder="Select a marker"
                   defaultValue={marker.lng}
-                  onChange={handleInput}
                 />
               </div>
               <div className="mb-4">
                 <label>Marker Type</label>
                 <select
-                  id="type"
+                  name="type"
                   className="form-select"
                   aria-label="Default select example"
                   onChange={handleInput}
