@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import "./GoogleMapsComponent.css";
 import gMapStyles from "./mapStyles";
 import PuffLoader from "react-spinners/PuffLoader";
+import crIcon from "../../../images/icons/crIcon.svg";
 import {
   useJsApiLoader,
   GoogleMap,
@@ -165,6 +166,11 @@ function GoogleMapsComponent(props) {
                   position={{
                     lat: parseFloat(markers.lat),
                     lng: parseFloat(markers.lng),
+                  }}
+                  icon={{
+                    url: `${crIcon}`,
+                    scaledSize: new window.google.maps.Size(30, 30),
+                    origin: new window.google.maps.Point(0, 0),
                   }}
                 />
               ))}

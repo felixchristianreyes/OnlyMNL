@@ -19,7 +19,7 @@ const HomeNavbar = () => {
           <Nav className="me-auto">
             <Nav.Link href="/">Home</Nav.Link>
             <Nav.Link href="add-markers">Add Marker</Nav.Link>
-            <Nav.Link href="app">Find Toilet</Nav.Link>
+            <Nav.Link href="cr">Find Toilet</Nav.Link>
             <NavDropdown
               variant="light"
               title="Community"

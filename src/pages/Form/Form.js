@@ -1,4 +1,7 @@
 import HomeNavbar from "../Home/Navbar/HomeNavbar";
+import bar from "../../images/icons/bar.png";
+import store from "../../images/icons/store.png";
+import toilet from "../../images/icons/toilet.png";
 import React, { useState, useEffect } from "react";
 import { useJsApiLoader, GoogleMap, Marker } from "@react-google-maps/api";
 import axios from "axios";
@@ -8,13 +11,12 @@ const options = {
   zoomControl: false,
 };
 
-const Form = (props) => {
-  // SET MARKER
+const Form = () => {
+  const [googleIcon, setGoogleIcon] = useState();
   const [markerData, setMarkerData] = useState([]);
   const [marker, setMarker] = useState("");
-  // GETS USER LOCATION
   const [center, setCenter] = useState();
-  // PAN TO USER CENTER
+  console.log(googleIcon);
 
   function getLocation() {
     if (navigator.geolocation) {
@@ -31,8 +33,6 @@ const Form = (props) => {
     });
   }
 
-  // MARKER CENTER // USER
-
   useEffect(() => {
     getLocation();
   }, []);
@@ -46,7 +46,6 @@ const Form = (props) => {
   if (!isLoaded) {
     return <div>Maps loading...</div>;
   }
-  //USER CENTER
 
   // FUNCTION TO POST
   function handleInput(e) {
@@ -55,6 +54,16 @@ const Form = (props) => {
       lat: marker.lat,
       lng: marker.lng,
     };
+
+    if (e.target.id === "type" && e.target.value === "1") {
+      setGoogleIcon(bar);
+    } else if (e.target.id === "type" && e.target.value === "2") {
+      setGoogleIcon(toilet);
+    } else if (e.target.id === "type" && e.target.value === "3") {
+      setGoogleIcon(store);
+    } else {
+    }
+
     setMarkerData(markerInfo);
     console.log(markerInfo);
   }
@@ -79,7 +88,6 @@ const Form = (props) => {
               <div className="mb-4">
                 <label>Latitude</label>
                 <input
-                  disabled
                   type="text"
                   className="form-control"
                   id="lat"
@@ -91,7 +99,6 @@ const Form = (props) => {
               <div className="mb-4">
                 <label>Longitude</label>
                 <input
-                  disabled
                   type="text"
                   className="form-control"
                   id="lng"
@@ -137,6 +144,11 @@ const Form = (props) => {
                 position={{
                   lat: parseFloat(marker.lat),
                   lng: parseFloat(marker.lng),
+                }}
+                icon={{
+                  url: googleIcon,
+                  scaledSize: new window.google.maps.Size(30, 30),
+                  origin: new window.google.maps.Point(0, 0),
                 }}
               />
             </GoogleMap>
