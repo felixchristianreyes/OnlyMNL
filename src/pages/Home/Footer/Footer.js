@@ -11,8 +11,8 @@ const Footer = () => (
           <div className="col-lg-3 col-md-6 footer-contact">
             <h3>Only Manila</h3>
             <p>
-              0601 Pluto St <br />
-              Bacoor, Cavite 4102
+              0601 Blumin <br />
+              Manila, Phillippines 4102
               <br />
               Phillippines <br />
               <br />
