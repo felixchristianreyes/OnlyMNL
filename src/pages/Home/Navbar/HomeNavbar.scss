@@ -1,0 +1,28 @@
+.homeNavbar {
+  z-index: 999999;
+  top: 0;
+  position: sticky;
+  background-color: #37517e;
+}
+
+.navbar-toggler-icon {
+  background-image: url("/public/images/hamburger.svg") !important;
+}
+
+.navbar-nav {
+  align-items: center !important;
+  background-color: #0acccb21 !important;
+  border-radius: 20px;
+  padding: 0 1rem;
+}
+
+.navbar-toggler {
+  color: #08c3c2 !important;
+  background-color: #480948 !important;
+  border: none !important;
+}
+
+
+.nav-link {
+  color: white !important;
+}

@@ -1,16 +1,12 @@
 import React from "react";
-import MainNav from "../Main/MainNav/MainNav";
 import "./Main.css";
-import Footer from "../Home/Footer/Footer";
 import GoogleMapsComponent from "./GoogleMapsComponent/GoogleMapsComponent";
-import Filter from "./Filter/Filter";
+import HomeNavbar from "../Home/Navbar/HomeNavbar";
 
-const Main = () => (
+const Main = (props) => (
   <>
-    <MainNav />
-    <GoogleMapsComponent />
-    <Filter />
-    <Footer />
+    <HomeNavbar />
+    <GoogleMapsComponent type={props.type} />
   </>
 );
 

@@ -1,9 +1,0 @@
-.filterCard {
-    display: flex !important;
-    justify-content: space-around;
-}
-
-.filterContainer {
-    max-width: 768px;
-}
-

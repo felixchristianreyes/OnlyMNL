@@ -1,6 +1,5 @@
  .footer-newsletter {
     padding: 50px 0;
-    background: #f3f5fa;
     text-align: center;
     font-size: 15px;
     color: #444444;
@@ -36,12 +35,12 @@
     background: none;
     font-size: 16px;
     padding: 0 20px;
-    background: #47b2e4;
+    background: #de144d;
     color: #fff;
     transition: 0.3s;
     border-radius: 50px;
     box-shadow: 0px 2px 15px rgba(0, 0, 0, 0.1);
   }
    .footer-newsletter form input[type=submit]:hover {
-    background: #209dd8;
+    background: #000;
   }

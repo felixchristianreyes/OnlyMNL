@@ -1,109 +1,206 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./GoogleMapsComponent.css";
 import gMapStyles from "./mapStyles";
+import PuffLoader from "react-spinners/PuffLoader";
+import toiletIcon from "../../../images/icons/toilet.png";
+import barIcon from "../../../images/icons/bar.png";
+import storeIcon from "../../../images/icons/store.png";
 import {
   useJsApiLoader,
   GoogleMap,
   Marker,
-  InfoWindow,
+  DirectionsRenderer,
 } from "@react-google-maps/api";
-import MarkerInfo from "./MarkerInfo/MarkerInfo";
-const markers = {
-  marker1: {
-    lat: 14.55234,
-    lng: 121.073583,
-  },
-  marker2: {
-    lat: 14.551865,
-    lng: 121.074046,
-  },
-  marker3: {
-    lat: 14.55273,
-    lng: 121.073507,
-  },
-};
+import axios from "axios";
+import { AiFillPropertySafety } from "react-icons/ai";
 
 const options = {
   styles: gMapStyles,
   disableDefaultUI: true,
-  zoomControl: true,
+  zoomControl: false,
 };
 
-const center = {
-  lat: 14.552973,
-  lng: 121.073485,
-};
-
-function GoogleMapsComponent() {
-  const [selected, setSelected] = useState(null);
-
+function GoogleMapsComponent(props) {
+  const [icon, setIcon] = useState();
   const { isLoaded } = useJsApiLoader({
     googleMapsApiKey: "AIzaSyBJl-1Frpgrjv8FlvBj-Fr5kkbFA3mDNAc",
   });
+  const [marker, setMarker] = useState();
+  const [loading, setLoading] = useState(false);
+  const [latitude, setLatitude] = useState();
+  const [longitude, setLongitude] = useState();
+  const [directionsResponse, setDirectionsResponse] = useState(null);
+
+  //USER CENTER
+
+  const center = {
+    lat: parseFloat(latitude),
+    lng: parseFloat(longitude),
+  };
+
+  function getLocation() {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(getCoordinates);
+    } else {
+      alert("Geolocation is not supported by this browser.");
+    }
+  }
+
+  function getCoordinates(position) {
+    setLatitude(parseFloat(position.coords.latitude));
+    setLongitude(parseFloat(position.coords.longitude));
+  }
+
+  async function getData() {
+    const res = await axios.get("http://localhost:8000/api/markers");
+    if (res.data.status === 200) {
+      const oldMarkers = res.data.data;
+      const newMarkers = [];
+      oldMarkers.forEach((element) => {
+        //1. BARS 2. TOILET. 3. STORE
+        if (element.type === `${props.type}`) {
+          newMarkers.push(element);
+        }
+        if (props.type === "1") {
+          setIcon(barIcon);
+        } else if (props.type === "2") {
+          setIcon(toiletIcon);
+        } else if (props.type === "3") {
+          setIcon(storeIcon);
+        }
+      });
+      console.log("newMarkers" + newMarkers);
+      setMarker(newMarkers);
+      console.log(oldMarkers);
+    }
+  }
+
+  function getNearestMarker() {
+    let lat1 = latitude;
+    let lon1 = longitude;
+    var pi = Math.PI;
+    var R = 6371; //equatorial radius
+    var distances = [];
+    var closest = -1;
+
+    for (let i = 0; i < marker.length; i++) {
+      var lat2 = marker[i].lat;
+      var lon2 = marker[i].lng;
+
+      var chLat = lat2 - lat1;
+      var chLon = lon2 - lon1;
+
+      var dLat = chLat * (pi / 180);
+      var dLon = chLon * (pi / 180);
+
+      var rLat1 = lat1 * (pi / 180);
+      var rLat2 = lat2 * (pi / 180);
+
+      var a =
+        Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+        Math.sin(dLon / 2) *
+          Math.sin(dLon / 2) *
+          Math.cos(rLat1) *
+          Math.cos(rLat2);
+      var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+      var d = R * c;
+
+      distances[i] = d;
+      if (closest === -1 || d < distances[closest]) {
+        closest = i;
+      }
+    }
+
+    // (debug) The closest marker is:
+    // return marker[closest];
+    const floatValue = {
+      lat: parseFloat(marker[closest].lat),
+      lng: parseFloat(marker[closest].lng),
+    };
+
+    return floatValue;
+    // console.log(marker[closest]);
+    // console.log(stringifiedValue);
+  }
+
+  async function calculateRoute() {
+    let start = center;
+    let end = getNearestMarker();
+    // eslint-disable-next-line no-undef
+    const directionsService = new google.maps.DirectionsService();
+    const results = await directionsService.route({
+      origin: start,
+      destination: end,
+      // eslint-disable-next-line no-undef
+      travelMode: google.maps.TravelMode.DRIVING,
+    });
+
+    setDirectionsResponse(results);
+
+    alert("Distance: " + results.routes[0].legs[0].distance.text);
+    alert("Duration: " + results.routes[0].legs[0].duration.text);
+  }
+
+  useEffect(() => {
+    setTimeout(() => {
+      calculateRoute();
+    }, 1000);
+  }, [loading]);
+
+  useEffect(() => {
+    getLocation();
+    getData();
+    setLoading(true);
+    setTimeout(() => {
+      setLoading(false);
+    }, 5000);
+  }, []);
 
   if (!isLoaded) {
-    return <div>no work</div>;
+    return <div>Maps loading...</div>;
   }
+
+  //RENDERER
   return (
     <>
-      <h1 className="gmcH1">
-        Toilet Locator
-        <span role="img" aria-label="toilet">
-          🚽
-        </span>
-      </h1>
-
-      <GoogleMap
-        mapContainerClassName="mapStyle"
-        center={center}
-        zoom={18}
-        options={options}
-      >
-        {/* Child components, such as markers, info windows, etc. */}
-        <Marker position={center} />
-
-        <Marker
-          position={markers.marker1}
-          icon={{
-            url: "/toiletIcon.svg",
-            scaledSize: new window.google.maps.Size(25, 25),
-          }}
-          onClick={() => {
-            setSelected(markers.marker1);
-          }}
-        />
-        <Marker
-          position={markers.marker2}
-          icon={{
-            url: "/toiletIcon.svg",
-            scaledSize: new window.google.maps.Size(25, 25),
-          }}
-          onClick={() => {
-            setSelected(markers.marker2);
-          }}
-        />
-        <Marker
-          position={markers.marker3}
-          icon={{
-            url: "/toiletIcon.svg",
-            scaledSize: new window.google.maps.Size(25, 25),
-          }}
-          onClick={() => {
-            setSelected(markers.marker3);
-          }}
-        />
-
-        {selected ? (
-          <InfoWindow
-            position={{ lat: selected.lat + 0.00001, lng: selected.lng }}
-            onCloseClick={() => {
-              setSelected(null);
-            }}
-          >
-            <MarkerInfo />
-          </InfoWindow>
-        ) : null}
-      </GoogleMap>
+      {loading ? (
+        <div className="loader">
+          <div className="d-flex flex-column">
+            <PuffLoader color="aqua" loading={loading} size={100} />
+          </div>
+        </div>
+      ) : (
+        <>
+          <div>
+            <GoogleMap
+              mapContainerClassName="mapStyle"
+              center={center}
+              zoom={19}
+              options={options}
+            >
+              {/* Child components, such as markers, info windows, etc. */}
+              <Marker position={center} />;
+              {marker.map((markers) => (
+                <Marker
+                  key={markers.id}
+                  position={{
+                    lat: parseFloat(markers.lat),
+                    lng: parseFloat(markers.lng),
+                  }}
+                  icon={{
+                    url: `${icon}`,
+                    scaledSize: new window.google.maps.Size(60, 60),
+                    origin: new window.google.maps.Point(0, 0),
+                  }}
+                />
+              ))}
+              {directionsResponse && (
+                <DirectionsRenderer directions={directionsResponse} />
+              )}
+            </GoogleMap>
+          </div>
+        </>
+      )}
     </>
   );
 }

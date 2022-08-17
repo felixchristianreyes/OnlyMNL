@@ -1,43 +1,90 @@
-import React from "react";
+/* eslint-disable jsx-a11y/anchor-is-valid */
+/* eslint-disable jsx-a11y/alt-text */
+import React, { useState } from "react";
 import "./Hero.css";
-import { Link } from "react-router-dom";
-import toiletfloating from "../../../images/toiletfloating.png";
+import { BsSearch } from "react-icons/bs";
+import bar from "/src/images/icons/bar.png";
+import toilet from "/src/images/icons/toilet.png";
+import store from "/src/images/icons/store.png";
 
-const Hero = () => (
-  <section id="hero" className="d-flex align-items-center" data-testid="Hero">
-    <div className="container">
-      <div className="row">
-        <div
-          className="col-lg-6 d-flex flex-column justify-content-center pt-4 pt-lg-0 order-2 order-lg-1"
-          data-aos="fade-up"
-          data-aos-delay="200"
-        >
-          <h1>Find your comfort in just a click</h1>
-          <h2>
-            Community generated public restrooms. <br />
-            By the people for the people.
-          </h2>
-          <div className="d-flex justify-content-center justify-content-lg-start">
-            <a href="locator" className="nav-link btn-get-started scrollto">
-              Find A Toilet
-            </a>
+const Hero = () => {
+  const [url, setUrl] = useState();
+
+  function handleInput(e) {
+    setUrl(e.target.value);
+  }
+  return (
+    <section
+      id="hero"
+      className="d-flex align-items-center pb-5 m-0"
+      data-testid="Hero"
+    >
+      <div className="container">
+        <div className="row d-flex justify-content-center">
+          <div className="col-md-9">
+            <div className="card p-4 mt-3 rounded-pill">
+              <h3 className="heading my-4 text-center">
+                What are you looking for?
+              </h3>
+              <div className="d-flex justify-content-center px-5 search12">
+                <div className="input-group input-group-lg">
+                  <span
+                    className="input-group-text text-white onlyLeft"
+                    id="inputGroup-sizing-lg"
+                  >
+                    ONLY/
+                  </span>
+                  <input
+                    name="search"
+                    type="text"
+                    className="form-control"
+                    onChange={handleInput}
+                    placeholder="ex. cr / bars / karinderya"
+                  />
+                  <a href={url} className="search-icon">
+                    <BsSearch />
+                  </a>
+                </div>
+              </div>
+              <div className="row mt-4 g-1 px-4 mb-5">
+                <div className="col-md-4 col-sm-6">
+                  <a href="cr">
+                    <div className="card-inner p-3 d-flex flex-column align-items-center">
+                      <img src={toilet} />
+                      <div className="text-center mg-text">
+                        <span className="mg-text text-dark">Comfort Room</span>
+                      </div>
+                    </div>
+                  </a>
+                </div>
+                <div className="col-md-4 col-sm-6">
+                  <a href="karinderya">
+                    <div className="card-inner p-3 d-flex flex-column align-items-center">
+                      <img src={store} width="50" />
+                      <div className="text-center mg-text">
+                        <span className="mg-text text-dark">Karinderya</span>
+                      </div>
+                    </div>
+                  </a>
+                </div>
+                <div className="col-md-4 col-sm-6">
+                  <a href="bar">
+                    <div className="card-inner p-3 d-flex flex-column align-items-center">
+                      <img src={bar} width="50" />
+                      <div className="text-center mg-text">
+                        <span className="mg-text text-dark">Bars</span>
+                      </div>
+                    </div>
+                  </a>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
-        <div
-          className="col-lg-6 order-1 order-lg-2 hero-img"
-          data-aos="zoom-in"
-          data-aos-delay="200"
-        >
-          <img
-            src={toiletfloating}
-            className="img-fluid animated"
-            alt="toilet"
-          />
-        </div>
       </div>
-    </div>
-  </section>
-);
+    </section>
+  );
+};
 
 Hero.propTypes = {};
 
