@@ -67,14 +67,14 @@ const Form = () => {
       type: e.target.type.value,
     };
     setMarkerData(markerInfo);
-    // console.log("postData", e.target.address.value);
-    // console.log("postData", e.target.lat.value);
-    // console.log("postData", e.target.lng.value);
-    // console.log("postData", e.target.type.value);
-    // console.log(markerInfo);
+    console.log("postData", e.target.address.value);
+    console.log("postData", e.target.lat.value);
+    console.log("postData", e.target.lng.value);
+    console.log("postData", e.target.type.value);
+    console.log(markerInfo);
 
     const res = await axios.post(
-      "https://phplaravel-821625-2823297.cloudwaysapps.com/api/add-markers",
+      "http://phplaravel-821625-2823297.cloudwaysapps.com/api/add-markers",
       markerData
     );
     if (res.data.status === 200) {
