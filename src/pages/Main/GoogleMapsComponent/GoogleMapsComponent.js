@@ -52,7 +52,7 @@ function GoogleMapsComponent(props) {
   }
 
   async function getData() {
-    const res = await axios.get("http://localhost:8000/api/markers");
+    const res = await axios.get("http://phplaravel-821625-2823297.cloudwaysapps.com/api/markers");
     if (res.data.status === 200) {
       const oldMarkers = res.data.data;
       const newMarkers = [];
