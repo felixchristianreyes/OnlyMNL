@@ -74,7 +74,7 @@ const Form = () => {
     console.log(markerInfo);
 
     const res = await axios.post(
-      "https://http://127.0.0.1:8000/api/add-markers",
+      "http://127.0.0.1:8000/api/add-markers",
       markerData
     );
     if (res.data.status === 200) {
