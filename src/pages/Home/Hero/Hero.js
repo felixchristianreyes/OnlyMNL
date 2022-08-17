@@ -1,6 +1,6 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 /* eslint-disable jsx-a11y/alt-text */
-import React from "react";
+import React, { useState } from "react";
 import "./Hero.css";
 import { BsSearch } from "react-icons/bs";
 import bar from "/src/images/icons/bar.png";
@@ -8,6 +8,11 @@ import toilet from "/src/images/icons/toilet.png";
 import store from "/src/images/icons/store.png";
 
 const Hero = () => {
+  const [url, setUrl] = useState();
+
+  function handleInput(e) {
+    setUrl(e.target.value);
+  }
   return (
     <section
       id="hero"
@@ -30,12 +35,13 @@ const Hero = () => {
                     ONLY/
                   </span>
                   <input
+                    name="search"
                     type="text"
                     className="form-control"
-                    aria-label="Sizing example input"
-                    aria-describedby="inputGroup-sizing-lg"
+                    onChange={handleInput}
+                    placeholder="ex. cr / bars / karinderya"
                   />
-                  <a href="#" className="search-icon">
+                  <a href={url} className="search-icon">
                     <BsSearch />
                   </a>
                 </div>

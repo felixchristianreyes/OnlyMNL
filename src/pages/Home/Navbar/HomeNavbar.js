@@ -19,7 +19,6 @@ const HomeNavbar = () => {
           <Nav className="me-auto">
             <Nav.Link href="/">Home</Nav.Link>
             <Nav.Link href="add-markers">Add Marker</Nav.Link>
-            <Nav.Link href="cr">Find Toilet</Nav.Link>
             <NavDropdown
               variant="light"
               title="Community"
@@ -29,11 +28,10 @@ const HomeNavbar = () => {
               <NavDropdown.Item href="#action/3.2">
                 Join Discord
               </NavDropdown.Item>
-              <NavDropdown.Item href="#action/3.3">Buy me a Coffee</NavDropdown.Item>
-              <NavDropdown.Divider />
-              
+              <NavDropdown.Item href="#action/3.3">
+                Buy me a Coffee
+              </NavDropdown.Item>
             </NavDropdown>
-            
           </Nav>
         </Navbar.Collapse>
       </Container>

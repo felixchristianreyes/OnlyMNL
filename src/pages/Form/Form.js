@@ -159,7 +159,7 @@ const Form = () => {
                 }}
                 icon={{
                   url: googleIcon,
-                  scaledSize: new window.google.maps.Size(30, 30),
+                  scaledSize: new window.google.maps.Size(60, 60),
                   origin: new window.google.maps.Point(0, 0),
                 }}
               />

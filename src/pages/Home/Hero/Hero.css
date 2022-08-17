@@ -64,7 +64,8 @@
 }
 
 .search-icon:hover {
-  color: #fff !important;
+  cursor: pointer;
+  color: rgb(0, 0, 0) !important;
 }
 
 a:link {
