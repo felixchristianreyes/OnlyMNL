@@ -74,7 +74,7 @@ const Form = () => {
     console.log(markerInfo);
 
     const res = await axios.post(
-      "http://phplaravel-821625-2823297.cloudwaysapps.com/api/add-markers",
+      "https://phplaravel-821625-2823297.cloudwaysapps.com/api/add-markers",
       markerData
     );
     if (res.data.status === 200) {
