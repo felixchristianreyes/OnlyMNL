@@ -3,9 +3,9 @@
 import React, { useState } from "react";
 import "./Hero.css";
 import { BsSearch } from "react-icons/bs";
-import bar from "/src/images/icons/bar.png";
-import toilet from "/src/images/icons/toilet.png";
-import store from "/src/images/icons/store.png";
+import bar from "../../../images/icons/bar.png";
+import toilet from "../../../images/icons/toilet.png";
+import store from "../../../images/icons/store.png";
 
 const Hero = () => {
   const [url, setUrl] = useState();

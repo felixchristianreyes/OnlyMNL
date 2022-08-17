@@ -52,7 +52,7 @@ const Footer = () => (
               <li>
                 <i className="bx bx-chevron-right"></i>{" "}
                 <a href="#">Web Design</a>
-              </li>
+              </li> 
               <li>
                 <i className="bx bx-chevron-right"></i>{" "}
                 <a href="#">Development</a>
