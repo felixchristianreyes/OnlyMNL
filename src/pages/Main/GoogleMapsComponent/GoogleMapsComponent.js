@@ -54,7 +54,7 @@ function GoogleMapsComponent(props) {
   async function getData() {
     const res = await axios.get("http://127.0.0.1:8000/api/markers");
     if (res.data.status === 200) {
-      const oldMarkers = res.data.data;
+      const oldMarkers = await res.data.data;
       const newMarkers = [];
       oldMarkers.forEach((element) => {
         //1. BARS 2. TOILET. 3. STORE
